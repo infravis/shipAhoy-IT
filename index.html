@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="light">
+
+<head>
+	<title>Ship Ahoy!</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<link type="text/css" rel="stylesheet" href="main.css">
+	<link rel="stylesheet" href="lib/leaflet/leaflet.css"
+		integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+	<link rel="stylesheet" href="lib/pico.conditional.min.css">
+
+	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+	<link rel="manifest" href="manifest.json" />
+	<script src="lib/leaflet/leaflet.js"></script>
+	<script src="lib/vega.5.30.0.js"></script>
+	<script src="lib/vega-lite.5.21.0.js"></script>
+	<script src="lib/vega-embed.6.26.0.js"></script>
+
+</head>
+
+<body>
+	<script type="importmap">
+			{
+				"imports": {
+					"three": "./lib/three.webgpu.min.js",
+					"three/webgpu": "./lib/three.webgpu.min.js",
+					"three/tsl": "./lib/three.tsl.min.js",
+					"three/addons/": "./lib/threeModules/"
+				}
+			}
+		</script>
+
+		<div class="pico" id="loader" aria-busy="true">
+			<div>
+				<h1>Ship Ahoy!</h1>
+				<img id="loaderLogo" src="favicon.png"><br>
+				<span data-i18n="controls.loading">Caricamento:</span> <progress id="loaderProgress" value="0" max="100"></progress>
+			</div>
+		</div>
+
+	<div id="main">
+		<button id="seaMovementButton" class="pico secondary" type="button" title="Pause sea movement" aria-pressed="true" style="display:none">
+			<img src="resources/waves_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.svg" alt="Sea movement" width="24" height="24">
+		</button>
+		<button id="languageButton" class="pico secondary" type="button">English</button>
+		<div id="threeContainer"></div>
+		<div id="annotationLabel" class="annotation"></div>
+		<div id="infobox" style="visibility:hidden">
+			<div class="pico">
+				<button id="overviewReturnButton"></button>
+				<div id="textbox"></div>
+			</div>
+			<div id="plot"></div>
+			<small id="plotCaption"></small>
+			<div id="map"></div>
+		</div>
+	</div>
+
+	<div class="pico">
+		<div id="titleboxWrapper" style="display:none">
+			<article id="titlebox">
+				<h1>Ship Ahoy!</h1>
+				<p data-i18n="app.tagline">
+					Navigating away from limited visibility, to unveil the environmental pressures and impacts from
+					maritime
+					transport.
+				</p>
+				<small data-i18n="app.contact">
+					This is still a work in progress! If you have any questions or if you want to contribute,
+					please contact Ida-Maja Hassellöv <br>(<a
+						href="mailto:ida-maja@chalmers.se">ida-maja@chalmers.se</a>).
+				</small>
+			</article>
+
+			<button data-i18n="acknowledgements.button" id="acknowledgementButton" class="pico secondary"
+				onclick="document.getElementById('acknowledgementModal').open = true">
+				Acknowledgements
+			</button>
+		</div>
+
+        <dialog id="acknowledgementModal">
+            <article>
+                <header>
+                    <button title="Chiudi" data-i18n-title="controls.close" rel="prev" onclick="document.getElementById('acknowledgementModal').open = false"></button>
+                    <p data-i18n="acknowledgements.heading"></p>
+                </header>
+                <p data-i18n="acknowledgements.thanks"></p>
+                <p data-i18n="acknowledgements.contributors"></p>
+                <p data-i18n="acknowledgements.project"></p>
+                <p data-i18n="acknowledgements.dischargeData"></p>
+                <p data-i18n="acknowledgements.mapData"></p>
+            </article>
+        </dialog>
+
+		<dialog id="imageModal">
+			<article>
+				<header>
+					<button title="Chiudi" data-i18n-title="controls.close" rel="prev"
+						onclick="document.getElementById('imageModal').open = false"></button>
+					<p><strong id="imageModalHeader"></strong></p>
+				</header>
+				<p>
+					<img id="imageModalImage"><br>
+					<small id="imageModalDescription">
+					</small>
+				</p>
+				<small>
+					&copy; <span id="imageModalAttribution"></span>.
+				</small>
+			</article>
+		</dialog>
+	</div>
+
+	<script type="module" src="src/app.js"></script>
+</body>
+
+</html>

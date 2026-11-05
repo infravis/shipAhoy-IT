@@ -1,0 +1,108 @@
+
+self.addEventListener("install", async event => {
+    const cache = await caches.open("pwa-assets");
+    // Store all resources on first SW install
+    cache.addAll([
+        "../",
+        "../manifest.json",
+        "../favicon.ico",
+        "../favicon.png",
+        "../main.css"
+    ]);
+    cache.add("./annotation.js");
+    cache.add("./annotations.js");
+    cache.add("./app.js");
+    cache.add("./i18n.js");
+    cache.add("../translations/it.json");
+    cache.add("../translations/en.json");
+    cache.add("./avscWorker.js");
+    cache.add("./heatmapWorker.js");
+    cache.add("./Lut.js");
+    cache.add("./main.js");
+    cache.add("./map.js");
+    cache.add("./particles.js");
+    cache.add("./plot.js");
+    cache.add("./sw.js");
+    cache.add("../lib/avsc.5.7.7.esm.js");
+    cache.add("../lib/camera-controls.module.min.js");
+    cache.add("../lib/pico.conditional.min.css");
+    cache.add("../lib/shp.esm.js");
+    cache.add("../lib/three.core.min.js");
+    cache.add("../lib/three.tsl.min.js");
+    cache.add("../lib/three.webgpu.min.js");
+    cache.add("../lib/vega-embed.6.26.0.js");
+    cache.add("../lib/vega-lite.5.21.0.js");
+    cache.add("../lib/vega.5.30.0.js");
+    cache.add("../lib/leaflet/leaflet-src.esm.js");
+    cache.add("../lib/leaflet/leaflet-src.esm.js.map");
+    cache.add("../lib/leaflet/leaflet-src.js");
+    cache.add("../lib/leaflet/leaflet-src.js.map");
+    cache.add("../lib/leaflet/leaflet.css");
+    cache.add("../lib/leaflet/leaflet.js");
+    cache.add("../lib/leaflet/leaflet.js.map");
+    cache.add("../lib/leaflet/images/layers-2x.png");
+    cache.add("../lib/leaflet/images/layers.png");
+    cache.add("../lib/leaflet/images/marker-icon-2x.png");
+    cache.add("../lib/leaflet/images/marker-icon.png");
+    cache.add("../lib/leaflet/images/marker-shadow.png");
+    cache.add("../lib/threeModules/libs/stats.module.js");
+    cache.add("../lib/threeModules/loaders/GLTFLoader.js");
+    cache.add("../lib/threeModules/objects/SkyMesh.js");
+    cache.add("../lib/threeModules/objects/WaterMesh.js");
+    cache.add("../lib/threeModules/tsl/display/GaussianBlurNode.js");
+    cache.add("../lib/threeModules/utils/BufferGeometryUtils.js");
+    cache.add("../resources/cruiseship.1k.glb");
+    cache.add("../resources/close.svg");
+    cache.add("../resources/data.avro");
+    cache.add("../resources/HELCOM_marine_area.latlng.zip");
+    cache.add("../resources/label.png");
+    cache.add("../resources/label.svg");
+    cache.add("../resources/OpenSans-Bold.ttf");
+    cache.add("../resources/OpenSans-Regular.ttf");
+    cache.add("../resources/perlin_noise_128x128.png");
+    cache.add("../resources/smoke.png");
+    cache.add("../resources/timeSeries.avro");
+    cache.add("../resources/waternormals.jpg");
+    cache.add("../resources/images/antifouling_1_inertcoating.jpg");
+    cache.add("../resources/images/antifouling_2_biocidal_copper_coating.jpg");
+    cache.add("../resources/images/antifouling_3_foulrelease_biocidefree_silicon_coating.jpg");
+    cache.add("../resources/images/Antifouling_Cu_load_2018.png");
+    cache.add("../resources/images/antifouling_hullmaster.png");
+    cache.add("../resources/images/antifouling_QR_hullmaster.png");
+    cache.add("../resources/images/BalW_discharge_hotspot_EU_2018.png");
+    cache.add("../resources/images/biofouling_1.jpg");
+    cache.add("../resources/images/biofouling_2.jpg");
+    cache.add("../resources/images/biofouling_3.jpg");
+    cache.add("../resources/images/Metadata.txt");
+    cache.add("../resources/images/scrubber_mussel_exposure.jpg");
+    cache.add("../resources/images/scrubber_seaurchin_exposed.jpg");
+    cache.add("../resources/images/scrubber_system.svg");
+    cache.add("../resources/images/ytreberg_2022_Vanadin.png");
+    cache.add("../resources/sdg_icons/E_SDG_PRINT-01.jpg");
+    cache.add("../resources/sdg_icons/E_SDG_PRINT-02.jpg");
+    cache.add("../resources/sdg_icons/E_SDG_PRINT-03.jpg");
+    cache.add("../resources/sdg_icons/E_SDG_PRINT-04.jpg");
+    cache.add("../resources/sdg_icons/E_SDG_PRINT-05.jpg");
+    cache.add("../resources/sdg_icons/E_SDG_PRINT-06.jpg");
+    cache.add("../resources/sdg_icons/E_SDG_PRINT-07.jpg");
+    cache.add("../resources/sdg_icons/E_SDG_PRINT-08.jpg");
+    cache.add("../resources/sdg_icons/E_SDG_PRINT-09.jpg");
+    cache.add("../resources/sdg_icons/E_SDG_PRINT-10.jpg");
+    cache.add("../resources/sdg_icons/E_SDG_PRINT-11.jpg");
+    cache.add("../resources/sdg_icons/E_SDG_PRINT-12.jpg");
+    cache.add("../resources/sdg_icons/E_SDG_PRINT-13.jpg");
+    cache.add("../resources/sdg_icons/E_SDG_PRINT-14.jpg");
+    cache.add("../resources/sdg_icons/E_SDG_PRINT-15.jpg");
+    cache.add("../resources/sdg_icons/E_SDG_PRINT-16.jpg");
+    cache.add("../resources/sdg_icons/E_SDG_PRINT-17.jpg");
+});
+
+self.addEventListener("fetch", event => {
+   event.respondWith(
+     fetch(event.request)
+     .catch(error => {
+       return caches.match(event.request);
+     })
+   );
+});
+
